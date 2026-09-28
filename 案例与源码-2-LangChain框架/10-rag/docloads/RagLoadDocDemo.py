@@ -10,11 +10,14 @@
 - `single` 更适合快速看整篇内容；`elements` 更适合理解“按结构拆成多个 Document”的效果。加载后得到 `List[Document]`，与 TXT/PDF 等一致，可统一走「分割 → 向量化 → 入库」流程。
 """
 
+from pathlib import Path
+
 # pip install langchain_community unstructured[docx] python-docx
 from langchain_community.document_loaders import UnstructuredWordDocumentLoader
 
+document_path = Path(__file__).resolve().parent / "assets" / "alibaba-more.docx"
 docs = UnstructuredWordDocumentLoader(
-    file_path="assets/alibaba-more.docx",
+    file_path=document_path,
     mode="single",  # single 整篇一个 Document；elements 按元素切分
 ).load()
 

@@ -10,11 +10,16 @@
 - 检索时只对正文向量化，metadata 更适合拿来做过滤、来源展示和结果解释，因此结构化表格数据尤其适合这样拆分。
 """
 
+from pathlib import Path
+
 # pip install langchain_community
 from langchain_community.document_loaders.csv_loader import CSVLoader
 
+# 基于脚本位置定位测试文件，避免受当前工作目录影响
+csv_path = Path(__file__).resolve().parent / "assets" / "sample.csv"
+
 # 方式一：不指定列 → 整行（所有列）拼成一条字符串作为 page_content，metadata 通常只有 source 等
-docs_all = CSVLoader(file_path="assets/sample.csv").load()
+docs_all = CSVLoader(file_path=csv_path).load()
 print("=== 方式一：整行作为 page_content ===")
 print(
     "page_content 示例:",
@@ -28,7 +33,7 @@ print("metadata 示例:", docs_all[0].metadata, "\n")
 
 # 方式二：指定 content_columns 与 metadata_columns → 正文只取 content 列，title/author 进 metadata，便于检索时按作者/标题过滤
 docs_split = CSVLoader(
-    file_path="assets/sample.csv",
+    file_path=csv_path,
     metadata_columns=["title", "author"],
     content_columns=["content"],
 ).load()

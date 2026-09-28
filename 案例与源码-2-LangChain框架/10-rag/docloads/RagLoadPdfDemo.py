@@ -11,11 +11,14 @@
 - 为何没 import pypdf 却要装 pypdf？PyPDFLoader 在 langchain_community 内部会「按需」import pypdf 来解析 PDF，langchain-community 不自动安装它，所以需单独 pip install pypdf。
 """
 
+from pathlib import Path
+
 # pip install langchain_community pypdf
 from langchain_community.document_loaders import PyPDFLoader
 
+pdf_path = Path(__file__).resolve().parent / "assets" / "sample.pdf"
 docs = PyPDFLoader(
-    file_path="assets/sample.pdf",
+    file_path=pdf_path,
     extraction_mode="plain",  # plain 纯文本；layout 按版面
 ).load()
 

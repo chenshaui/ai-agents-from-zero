@@ -11,12 +11,15 @@
 - 为何用 split_documents 而不是 split_text？split_text(字符串) 入参是「一段文本」，返回字符串列表；这里入参是 Document 列表（来自 loader.load()），需要得到「带 metadata 的 Document 列表」供后续向量化/检索，只能用 split_documents。
 """
 
+from pathlib import Path
+
 # pip install langchain-unstructured（部分环境加载本地文件还需 python-magic-bin）
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_unstructured import UnstructuredLoader
 
 # 1. 加载文档得到 Document 列表
-loader = UnstructuredLoader("rag.txt")
+document_path = Path(__file__).resolve().with_name("rag.txt")
+loader = UnstructuredLoader(document_path)
 documents = loader.load()
 
 # 2. 同一套分割参数：块 100 字符，重叠 30

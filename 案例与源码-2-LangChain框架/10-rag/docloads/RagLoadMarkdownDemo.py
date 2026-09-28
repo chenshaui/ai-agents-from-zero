@@ -9,11 +9,14 @@
 - 适合技术文档、README 等；后续分割时也可选用 MarkdownHeaderTextSplitter 按标题切分（见 2.3 文本分割器表）。
 """
 
+from pathlib import Path
+
 # pip install langchain_community unstructured[md]
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 
+markdown_path = Path(__file__).resolve().parent / "assets" / "sample.md"
 docs = UnstructuredMarkdownLoader(
-    file_path="assets/sample.md",
+    file_path=markdown_path,
     mode="elements",  # single 整篇；elements 按元素切分
 ).load()
 

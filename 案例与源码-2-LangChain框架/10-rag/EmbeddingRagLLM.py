@@ -13,8 +13,10 @@
 """
 
 # pip install unstructured docx2txt python-docx
-from langchain.chat_models import init_chat_model
 import os
+from pathlib import Path
+
+from langchain.chat_models import init_chat_model
 from langchain_community.document_loaders import Docx2txtLoader
 from langchain_core.prompts import PromptTemplate
 from langchain_classic.text_splitter import CharacterTextSplitter
@@ -56,7 +58,8 @@ embeddings = DashScopeEmbeddings(
 )
 
 # 1. 加载 docx（错误码文档）
-loader = Docx2txtLoader("alibaba-java.docx")
+document_path = Path(__file__).resolve().with_name("alibaba-java.docx")
+loader = Docx2txtLoader(document_path)
 documents = loader.load()
 
 # 2. 分割（此处用 CharacterTextSplitter 便于快速跑通；真实项目里更常见的通用首选是 RecursiveCharacterTextSplitter）

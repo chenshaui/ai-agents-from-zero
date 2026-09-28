@@ -10,10 +10,12 @@
 - 后续可接文本分割器、嵌入模型与向量库，完成 RAG 的「加载 → 分割 → 向量化 → 存储」流程。
 """
 
+from pathlib import Path
+
 # pip install langchain_community
 from langchain_community.document_loaders import TextLoader
 
-file_path = "assets/sample.txt"
+file_path = Path(__file__).resolve().parent / "assets" / "sample.txt"
 encoding = "utf-8"
 
 # load() 为 BaseLoader 统一接口，返回 List[Document]
