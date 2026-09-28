@@ -204,7 +204,7 @@
    python 案例与源码-2-LangChain框架/01-helloworld/StandardDesc.py
    ```
 
-   **注意**：必须在**项目根目录**执行 `python`，否则会读不到 `.env`。若不想用云 API，可使用 [Ollama 本地模型](新手入门与常见问题.md#_54-不想用云-api：用本地-ollama（无需-key）)（无需 Key）。
+   **建议**：在**项目根目录**执行 `python`，便于统一管理虚拟环境、依赖和输出文件。普通脚本中的 `load_dotenv()` 通常会自动向上查找 `.env`；如果你使用 IDE、REPL 或调试器且读取不到 Key，请检查其工作目录配置。若不想用云 API，可使用 [Ollama 本地模型](新手入门与常见问题.md#_54-不想用云-api：用本地-ollama（无需-key）)（无需 Key）。
 
 遇到 `ModuleNotFoundError`、API Key 报错、找不到 `.env` 等，请查看 [新手入门与常见问题 - 常见问题与解决](新手入门与常见问题.md#_6、常见问题与解决)。
 
